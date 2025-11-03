@@ -43,7 +43,20 @@ app.get('/getData',(req,res)=>{
         }
     })
 })
+//----------------Getting data by Id---------------
 
+app.get('/getData/:id',(req,res)=>{
+    const id = req.params.id;
+    const get_query = "SELECT * FROM demotable WHERE id = $1";
+    con.query(get_query,[id],(err,result)=>{
+        if(err)
+        {
+            res.send(err)
+        }else{
+            res.send(result.rows)
+        }
+    }) //id = $1
+})
 app.listen(3000,()=>{
     console.log("Server is running...");
 })
