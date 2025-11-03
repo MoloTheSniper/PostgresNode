@@ -12,7 +12,7 @@ const con = new Client({
 })
 con.connect().then(()=>console.log("Connected"))
 
-//-------------Part2--------------
+//-------------Posting data into data base--------------
 app.post('/postData',(req,res)=>{
 
     const {name, id} = req.body;
@@ -25,6 +25,21 @@ app.post('/postData',(req,res)=>{
         else{
             console.log(result);
             res.send("Posted Data!")
+        }
+    })
+})
+
+//----------------Getting data from database------------
+app.get('/getData',(req,res)=>{
+    const get_query = 'SELECT * FROM demotable';
+    con.query(get_query,(err,result)=>{
+        if(err)
+        {
+            res.send(err);
+        }
+        else{
+            //console.log(result);
+            res.send(result.rows);
         }
     })
 })
