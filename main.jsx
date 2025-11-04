@@ -73,6 +73,20 @@ app.put('/update/:id',(req,res)=>{
     })
 
 })
+
+app.delete('/delete/:id',(req,res)=>{
+    const id = req.params.id
+    const delete_query = "DELETE FROM demotable WHERE id = $1";
+    con.query(delete_query,[id],(err,result)=>{
+        if(err)
+        {
+            res.send(err)
+        }
+        else{
+            res.send(result)
+        }
+    })
+})
 app.listen(3000,()=>{
     console.log("Server is running...");
 })
