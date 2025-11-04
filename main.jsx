@@ -57,6 +57,22 @@ app.get('/getData/:id',(req,res)=>{
         }
     }) //id = $1
 })
+
+app.put('/update/:id',(req,res)=>{
+    const id = req.params.id;
+    const name = req.body.name;
+
+    const update_query ="UPDATE demotable SET name = $1 WHERE id = $2";
+    con.query(update_query,[name,id],(err,result)=>{
+        if(err)
+        {
+            res.send(err)
+        }else{
+            res.send("UPDATED")
+        }
+    })
+
+})
 app.listen(3000,()=>{
     console.log("Server is running...");
 })
